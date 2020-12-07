@@ -58,29 +58,22 @@ function Tweak:SetPositionPlayerFrames(info, value)
   self.db.profile.positionPlayerFrames = value
 end
 
-function Tweak:PositionPlayerFrames()
-    PlayerFrame:ClearAllPoints()
-  TargetFrame:ClearAllPoints()
-  
-  PlayerFrame:SetPoint(
-    "BOTTOMLEFT", UIParent, "CENTER",
-    (UIParent:GetWidth() / 4) * -1,
-    (UIParent:GetHeight() / 5) * -1
-  )
-
-  TargetFrame:SetPoint(
-    "BOTTOMRIGHT", UIParent, "CENTER",
-    (UIParent:GetWidth() / 4),
-    (UIParent:GetHeight() / 5) * -1
-  )
+function Tweak:PositionPlayerFrames()  
+  local yOffset = (UIParent:GetHeight() / 5) * -1
+  local xOffset = UIParent:GetWidth() / 4
   
   TARGET_FRAME_BUFFS_ON_TOP = true
-  PlayerFrame:SetUserPlaced(true)
+  TargetFrame:ClearAllPoints()
+  TargetFrame:SetPoint("BOTTOMRIGHT", UIParent, "CENTER", xOffset, yOffset)  
   TargetFrame:SetUserPlaced(true)
+
+  PlayerFrame:ClearAllPoints()
+  PlayerFrame:SetPoint("BOTTOMLEFT", UIParent, "CENTER", xOffset * -1, yOffset)
+  PlayerFrame:SetUserPlaced(true)
 end
 
 function Tweak:ResetPlayerFrames()
   TARGET_FRAME_BUFFS_ON_TOP = false
-  PlayerFrame_ResetUserPlacedPosition()
   TargetFrame_ResetUserPlacedPosition()
+  PlayerFrame_ResetUserPlacedPosition()
 end
